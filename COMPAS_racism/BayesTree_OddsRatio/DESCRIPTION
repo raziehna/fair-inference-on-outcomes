@@ -1,0 +1,16 @@
+Package: BayesTree
+Title: Bayesian Additive Regression Trees
+Version: 0.3-1.4
+Date: 2016-2-21
+Author: Hugh Chipman <hugh.chipman@gmail.com>, Robert McCulloch
+        <robert.e.mcculloch@gmail.com>
+Description: This is an implementation of BART:Bayesian Additive Regression Trees,
+        by Chipman, George, McCulloch (2010).
+Maintainer: Robert McCulloch <robert.e.mcculloch@gmail.com>
+Imports: nnet
+License: GPL (>= 2)
+URL: http://www.r-project.org, http://www.rob-mcculloch.org
+Packaged: 2016-07-06 08:22:27 UTC; hornik
+Repository: CRAN
+Date/Publication: 2016-07-06 10:26:13
+NeedsCompilation: yes
