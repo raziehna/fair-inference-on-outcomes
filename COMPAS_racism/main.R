@@ -4,7 +4,7 @@ cat("\f")
 
 set.seed(0)
 
-setwd("~/Downloads/Fairness_code/COMPAS_racism/")
+setwd("~/Downloads")
 
 library(devtools)
 load_all("BayesTree_OddsRatio/")
