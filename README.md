@@ -19,8 +19,26 @@ publisher = { AAAI Press }
 ```
 
 
-## Abstract  
-In this paper, we consider the problem of fair statistical in- ference involving outcome variables. Examples include classification and regression problems, and estimating treatment effects in randomized trials or observational data. The issue of fairness arises in such problems where some covariates or treatments are “sensitive,” in the sense of having potential of creating discrimination. In this paper, we argue that the presence of discrimination can be formalized in a sensible way as the presence of an effect of a sensitive covariate on the outcome along certain causal pathways, a view which gener- alizes (Pearl 2009). A fair outcome model can then be learned by solving a constrained optimization problem. We discuss a number of complications that arise in classical statistical in- ference due to this view and provide workarounds based on recent work in causal and semi-parametric inference.
+In this paper, we consider the problem of fair statistical inference involving outcome variables. The issue of fairness arises in such problems where some covariates or treatments are “sensitive,” in the sense of having potential of creating discrimination. In this paper, we argue that the presence of discrimination can be formalized in a sensible way as the presence of an effect of a sensitive covariate on the outcome along certain causal pathways, a view which generalizes (Pearl 2009). A fair outcome model can then be learned by solving a constrained optimization problem. 
+
+
+
+We illustrate our approach to fair inference via two datasets: the COMPAS dataset (Angwin et al. 2016) and the Adult dataset (Lichman 2013). 
+
+### COMMPAS data
+
+Using COMPAS data, we are interested in predicting risk of recidivism among African-Americans and Caucasians. Data includes race denoted by A, prior convictions as the mediator denoted by M, demographic information such as age and gender collected in C, and recidivism indicator Y, as shown in figure (a). We define discrimination via the direct path from race to recidivism. The effect along this path is called natural direct effect (NDE) [9, 6]. We obtained the posterior sample representation of E[Y |A, M, C] via both regular and constrained BART [10]. Under the unconstrained posterior, the NDE (on the odds ratio scale) was equal to 1.3, which implies that the odds of recidivism would have been 1.3 times higher if we hypothetically would have changed the race from Caucasian to African-American. Using unconstrained BART, our prediction accuracy on the test set was 67.8%, removing treatment from the outcome model dropped the accuracy to 64.0%, while using constrained BART lead to the accuracy of 66.4%. As expected, dropping an informative feature led to greater decrease in accuracy, compared to simply constraining the outcome model to obey the constraint on the NDE. Our approach, by definition, cannot do better than classifiers based on the full maximum likelihood estimator, since such an estimator uses data as well as possible under correctly specified models. The idea behind our proposal is to use the data as well as possible while also remaining fair.
+
+
+### ADULT data
+
+Using ADULT data, we are interested in learning a statistical model that predicts the class of income for a given individual. Suppose banks are interested in using this model to identify reliable candidates for loan application. Raw use of data might construct models that are biased towards females who are perceived to have lower income in general compared to males.  Gender is the sensitive variable in this example denoted by A in figure (b) and income class is denoted by Y. M denotes the marital status, L denotes the level of education, and R consists of three variables, occupation, hours per week, and work class. The baseline variables including age and nationality are collected in C. U1 and U2 capture the unobserved confounders between M, Y and L, R, respectively. Here, besides the direct effect (A → Y ), we would like to remove the effect of gender on income through marital status (A → M → ... → Y). The “disallowed" paths are drawn in green in figure (b).
+
+<p align="center">
+<img width="475" alt="Screenshot 2019-07-22 00 05 27" src="https://user-images.githubusercontent.com/19523408/61605624-6e380800-ac14-11e9-94e3-577bebf08343.png">
+</p>
+
+
 
 
 ## Brief Overview 
@@ -46,9 +64,6 @@ Crucial to our proposal, statistical inference on previously unseen instances ca
 
 
 In situations where the PSE is not identifiable, we suggest three classes of approaches: more assumptions that yield identification, if they are sensible, inclusion of additional paths that renders the PSE identified (but at the cost of including “fair” paths in our measure of discrimination), or relying on non-parametric bounds for the non-identified PSE [8]. In cases where we wish to regularize the outcome prediction model, we use tools from semi-parametric inference to give estimators g(.) which yield consistent estimates of the PSE regardless of the chosen outcome model.
-
-
-We illustrate our approach to fair inference via the COMPAS dataset [2] where we are interested in predicting risk of recidivism among African-Americans and Caucasians. Data includes race denoted by A, prior convictions as the mediator denoted by M, demographic information such as age and gender collected in C, and recidivism indicator Y . We define discrimination via the direct path from race to recidivism. The effect along this path is called natural direct effect (NDE) [9, 6]. We obtained the posterior sample representation of E[Y |A, M, C] via both regular and constrained BART [10]. Under the unconstrained posterior, the NDE (on the odds ratio scale) was equal to 1.3, which implies that the odds of recidivism would have been 1.3 times higher if we hypothetically would have changed the race from Caucasian to African-American. Using unconstrained BART, our prediction accuracy on the test set was 67.8%, removing treatment from the outcome model dropped the accuracy to 64.0%, while using constrained BART lead to the accuracy of 66.4%. As expected, dropping an informative feature led to greater decrease in accuracy, compared to simply constraining the outcome model to obey the constraint on the NDE. Our approach, by definition, cannot do better than classifiers based on the full maximum likelihood estimator, since such an estimator uses data as well as possible under correctly specified models. The idea behind our proposal is to use the data as well as possible while also remaining fair.
 
 
 One of the advantages of our approach is it can be readily extended to concepts like affirmative action and “the wage gap” in a way that matches human intuition. One methodological difficulty with our approach is the need for a computationally challenging constrained optimization problem. An alternative is to think about reparameterizing the observed data likelihood in terms of causal parameter for an arbitrary PSE (which is currently an open problem).
