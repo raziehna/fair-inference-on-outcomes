@@ -24,7 +24,9 @@ In discussing the extent to which a particular approach is “fair” we believe
 To represent discrimination formally, we assume the observed data distribution p(Y, X), is induced by a causal model, and the PSE is identified as a functional f(p(Y,X)). Finally, we fix upper and lower bounds εl , εu on the PSE, representing the degree of discrimination we are willing to tolerate. Our proposal is to transform the inference problem on p(Y, X), the “unfair” world, into an inference problem on another distribution p∗(Y, X), the “fair” world, which is close, in the KL-divergence sense, to p(Y,X) while also having the property that the PSE lies within (εl,εu). Given a finite dataset D drawn from p(Y, X), a likelihood function L(D; α), an estimator g(D) of the PSE, and εl , εu , we approximate p∗ by solving the following constrained maximum likelihood problem:
 
 
+<p align="center">
 <img width="218" alt="Screenshot 2019-07-21 22 47 12" src="https://user-images.githubusercontent.com/19523408/61602932-9110ef00-ac09-11e9-9bf7-77fbcdc18e12.png">
+</p>
 
 
 Crucial to our proposal, statistical inference on previously unseen instances cannot be carried out until instances are mapped onto the fair world p∗. This is because unseen instances will generally be drawn from p, rather than p∗. We propose a simple conservative approach for doing so, although others are possible. Had we known p and p∗ exactly, predicting Y given α , and a new data point xi entails using only a subset of the values xiW where W is the largest subset of X where p(W) = p∗(W), assuming W is non-empty. Since we don’t know p and p∗, the set W depends on what parts of p(Y, X) are constrained, and this depends on the estimator g.
