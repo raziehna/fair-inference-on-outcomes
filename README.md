@@ -7,6 +7,20 @@ This is an implementation of the following paper:
 (AAAI, 2018)
 
 
+
+## Bibliography
+If you find it useful, please consider citing:
+```
+@inproceedings{nabi18fair,
+title = {Fair Inference on Outcomes},
+author = { Razieh Nabi and Ilya Shpitser},
+booktitle = {Proceedings of the Thirty Second Conference on Association for the Advancement of Artificial Intelligence (AAAI-32nd)},
+year = { 2018 }, 
+publisher = { AAAI Press }
+}
+```
+
+
 ## Abstract  
 In this paper, we consider the problem of fair statistical in- ference involving outcome variables. Examples include classification and regression problems, and estimating treatment effects in randomized trials or observational data. The issue of fairness arises in such problems where some covariates or treatments are “sensitive,” in the sense of having potential of creating discrimination. In this paper, we argue that the presence of discrimination can be formalized in a sensible way as the presence of an effect of a sensitive covariate on the outcome along certain causal pathways, a view which gener- alizes (Pearl 2009). A fair outcome model can then be learned by solving a constrained optimization problem. We discuss a number of complications that arise in classical statistical in- ference due to this view and provide workarounds based on recent work in causal and semi-parametric inference.
 
@@ -42,19 +56,21 @@ We illustrate our approach to fair inference via the COMPAS dataset [2] where we
 One of the advantages of our approach is it can be readily extended to concepts like affirmative action and “the wage gap” in a way that matches human intuition. One methodological difficulty with our approach is the need for a computationally challenging constrained optimization problem. An alternative is to think about reparameterizing the observed data likelihood in terms of causal parameter for an arbitrary PSE (which is currently an open problem).
 
 
+## References 
 
+[1] Judea Pearl. Causality: Models, Reasoning, and Inference. Cambridge University Press, 2 edition, 2009.
+[2] J. Angwin, J. Larson, S. Mattu, and L. Kirchner. Machine bias. https://www.propublica.org/criminal-
+sentencing, 2016.
+[3] Moritz Hardt, Eric Price, and Nati Srebro. Equality of opportunity in supervised learning. In Advances In
+Neural Information Processing Systems, pages 3315 – 3323, 2016.
+[4] Big data: A report on algorithmic systems, opportunity, and civil rights, May 2016.
+[5] 7th Circuit Court. Carson vs Bethlehem Steel Corp., 1996. 70 FEP cases 921.
+[6] Judea Pearl. Direct and indirect effects. In Proceedings of the Seventeenth Conference on Uncertainty in Artificial Intelligence (UAI-01), pages 411–420. Morgan Kaufmann, San Francisco, 2001.
+[7] Chen Avin, Ilya Shpitser, and Judea Pearl. Identifiability of path-specific effects. In Proceedings of the Nineteenth International Joint Conference on Artificial Intelligence (IJCAI-05), volume 19, pages 357–363. Morgan Kaufmann, San Francisco, 2005.
+[8] Caleb Miles, Phyllis Kanki, Seema Meloni, and Eric Tchetgen Tchetgen. On partial identification of the pure direct effect. Journal of Causal Inference, 2016.
+[9] James M. Robins and Sander Greenland. Identifiability and exchangeability of direct and indirect effects. Epidemiology, 3:143–155, 1992.
+[10] Hugh A. Chipman, Edward I. George, and Robert E. McCulloch. BART: Bayesian additive regression trees. Annals of Applied Statistics, 4(1):266–298, 2010.
 
-## Bibliography
-If you find it useful, please consider citing:
-```
-@inproceedings{nabi18fair,
-title = {Fair Inference on Outcomes},
-author = { Razieh Nabi and Ilya Shpitser},
-booktitle = {Proceedings of the Thirty Second Conference on Association for the Advancement of Artificial Intelligence (AAAI-32nd)},
-year = { 2018 }, 
-publisher = { AAAI Press }
-}
-```
 
 
 ## License
